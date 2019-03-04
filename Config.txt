@@ -1,0 +1,14 @@
+#yarn init -y
+Inicia o node novamente
+#yarn add nodemon -D
+
+    "Scritps": {
+    "start": "nodemon index.js"
+  },
+
+
+//Migration - Controle de Versão do Banco de Dados
+
+//#yarn add bcryptjs - fazer criptografia de senhas
+
+
