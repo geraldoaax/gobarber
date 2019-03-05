@@ -1,11 +1,14 @@
-const express = require('express')
+const express = require("express");
+const multerConfig = require("./config/multer");
 
-const routes = express.Router()
+const upload = require("multer")(multerConfig);
 
-const UserController = require('./app/controllers/UserController')
+const routes = express.Router();
+
+const UserController = require("./app/controllers/UserController");
 
 // routes.get('/', (req, res) => res.render('auth/signup'))
-routes.get('/signup', UserController.create)
-routes.post('/signup', UserController.store)
+routes.get("/signup", UserController.create);
+routes.post("/signup", UserController.store);
 
-module.exports = routes
+module.exports = routes;
