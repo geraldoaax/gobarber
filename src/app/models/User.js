@@ -23,6 +23,11 @@ module.exports = (sequilize, Datatypes) => {
       }
     }
   )
+  // não usar arrow function aqui
+  // compara a senha do logiun com o banco de dados..
+  User.prototype.checkPassword = function (password) {
+    return bcrypt.compare(password, this.password_hash)
+  }
 
   return User
 }
