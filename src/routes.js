@@ -4,14 +4,19 @@ const upload = require('multer')(multerConfig)
 
 const routes = express.Router()
 
+const authMiddlewares = require('./app/middlewares/auth')
+const guestMiddlewares = require('./app/middlewares/guest')
+
 const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 
-routes.get('/', SessionController.create)
+routes.use('/app/', authMiddlewares)
+
+routes.get('/', guestMiddlewares, SessionController.create)
 routes.post('/signin', SessionController.store)
 
 // routes.get('/', (req, res) => res.render('auth/signup'))
-routes.get('/signup', UserController.create)
+routes.get('/signup', guestMiddlewares, UserController.create)
 routes.post('/signup', upload.single('avatar'), UserController.store)
 
 routes.get('/app/dashboard', (req, res) => {
