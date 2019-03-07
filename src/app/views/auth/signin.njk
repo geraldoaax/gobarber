@@ -4,6 +4,8 @@
   <form action="/signin" method="post">
   <img src="/images/logo.svg", heigth="42"/>
 
+  {% include "_partials/flash.njk" %}
+
   <input type="text" name="email" placeholder="Seu Email">
   <input type="password" name="password" placeholder="Senha Secreta">
 

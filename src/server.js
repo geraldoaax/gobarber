@@ -3,6 +3,7 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const nunjucks = require('nunjucks')
 const path = require('path')
+const flash = require('connect-flash')
 
 class App {
   constructor () {
@@ -15,6 +16,7 @@ class App {
   // Middleware é todo o tipo de função que está entre um pedido HTTP e a resposta final que o servidor envia de volta para o cliente.
   middlewares () {
     this.express.use(express.urlencoded({ extended: false }))
+    this.express.use(flash)
     this.express.use(
       session({
         name: 'root',

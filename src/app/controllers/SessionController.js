@@ -9,19 +9,26 @@ class SessionController {
     const { email, password } = req.body
     // método do sequelize de buscar apenas um registro
     const user = await User.findOne({ where: { email } })
-
+    // Checa se o usuário existe
     if (!user) {
-      console.log('Usuário não encontrato')
+      req.flash('error', 'Usuário Não Encontrado!')
       return res.redirect('/')
     }
-
+    // checa a validade da senha
     if (!(await user.checkPassword(password))) {
-      console.log('Senha Incorreta')
+      req.flash('error', 'Senha Incorreta!')
       return res.redirect('/')
     }
     req.session.user = user
 
     return res.redirect('/app/dashboard')
+  }
+
+  destroy (req, res) {
+    req.session.destroy(() => {
+      res.clearCookie('root')
+      return res.redirect('/')
+    })
   }
 }
 

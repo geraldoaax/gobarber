@@ -10,7 +10,18 @@ const guestMiddlewares = require('./app/middlewares/guest')
 const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 
+// variável global para que todas as views fiquem sabendo das mensagens de erro
+routes.use((req, res, next) => {
+  res.locals.flashSucces = req.flash('success')
+  res.locals.flashError = req.flash('error')
+
+  next()
+})
+
 routes.use('/app/', authMiddlewares)
+
+// rota logout
+routes.get('/app/logout', SessionController.destroy)
 
 routes.get('/', guestMiddlewares, SessionController.create)
 routes.post('/signin', SessionController.store)
