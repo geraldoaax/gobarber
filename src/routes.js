@@ -15,7 +15,7 @@ routes.use((req, res, next) => {
   res.locals.flashSucces = req.flash('success')
   res.locals.flashError = req.flash('error')
 
-  next()
+  return next()
 })
 
 routes.use('/app/', authMiddlewares)
