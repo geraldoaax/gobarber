@@ -9,6 +9,7 @@ const guestMiddlewares = require('./app/middlewares/guest')
 
 const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
+const DashboardController = require('./app/controllers/DashboardController')
 
 // variável global para que todas as views fiquem sabendo das mensagens de erro
 routes.use((req, res, next) => {
@@ -30,9 +31,6 @@ routes.post('/signin', SessionController.store)
 routes.get('/signup', guestMiddlewares, UserController.create)
 routes.post('/signup', upload.single('avatar'), UserController.store)
 
-routes.get('/app/dashboard', (req, res) => {
-  console.log(req.session.user)
-  res.render('dashboard')
-})
+routes.get('/app/dashboard', DashboardController.index)
 
 module.exports = routes
