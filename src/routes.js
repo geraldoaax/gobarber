@@ -10,6 +10,7 @@ const guestMiddlewares = require('./app/middlewares/guest')
 const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 const DashboardController = require('./app/controllers/DashboardController')
+const FileController = require('./app/controllers/FileController')
 
 // variável global para que todas as views fiquem sabendo das mensagens de erro
 routes.use((req, res, next) => {
@@ -18,6 +19,9 @@ routes.use((req, res, next) => {
 
   return next()
 })
+
+// rota para ver os arquivos de imagem
+routes.get('/files/:file', FileController.show)
 
 routes.use('/app/', authMiddlewares)
 
