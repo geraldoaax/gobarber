@@ -3,5 +3,5 @@ src/config/database.js
 *tmp/sessions/*
 *tmp/uploads/*
 package.json
-
-package.json
+package-lock.json
+yarn.lock

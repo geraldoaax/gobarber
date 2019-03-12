@@ -11,6 +11,8 @@ const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 const DashboardController = require('./app/controllers/DashboardController')
 const FileController = require('./app/controllers/FileController')
+const AppointmentController = require('./app/controllers/AppointmentController')
+const AvailableController = require('./app/controllers/AvailableController')
 
 // variável global para que todas as views fiquem sabendo das mensagens de erro
 routes.use((req, res, next) => {
@@ -36,5 +38,8 @@ routes.get('/signup', guestMiddlewares, UserController.create)
 routes.post('/signup', upload.single('avatar'), UserController.store)
 
 routes.get('/app/dashboard', DashboardController.index)
+
+routes.get('/app/appointments/new/:provider', AppointmentController.create)
+routes.get('/app/available/:provider', AvailableController.index)
 
 module.exports = routes

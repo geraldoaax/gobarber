@@ -13,7 +13,8 @@
          <strong> {{ provider.name }} </strong>
 
         </div>
-      <a href="">+</a>
+        {# criar o agendamento com o prodiver id especifico #}
+      <a href="/app/appointments/new/{{ provider.id }}">+</a>
      </li>
     {% endfor %}
    </ul>
