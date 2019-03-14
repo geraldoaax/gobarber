@@ -1,11 +1,10 @@
 const moment = require('moment')
-const { Appointment } = require('../models')
-// dentro do OP traz os operadores de consulta where do sequelize
 const { Op } = require('sequelize')
+const { Appointment } = require('../models')
 
 class AvailableController {
   async index (req, res) {
-    const date = moment(parseInd(parse.req.date))
+    const date = moment(parseInt(req.query.date))
 
     const appointments = await Appointment.findAll({
       where: {
@@ -29,8 +28,10 @@ class AvailableController {
       '14:00',
       '15:00',
       '16:00',
-      '17:00'
+      '17:00',
+      '18:00'
     ]
+
     const available = schedule.map(time => {
       const [hour, minute] = time.split(':')
       const value = date
@@ -38,16 +39,12 @@ class AvailableController {
         .minute(minute)
         .second(0)
 
-      // 2018-11-20 08:00:00 modelo da data acima
-
       return {
         time,
         value: value.format(),
-        // verifica se os horários passsou ou não
         available:
           value.isAfter(moment()) &&
           !appointments.find(a => moment(a.date).format('HH:mm') === time)
-        // && - verifica o agendamento
       }
     })
 
